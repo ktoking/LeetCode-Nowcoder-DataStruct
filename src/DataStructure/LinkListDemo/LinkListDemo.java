@@ -210,6 +210,19 @@ class LinkedListDemo{
     }
 
     /**
+     * 递归反转链表
+     */
+    public Node reverse1(Node head){
+        if(head==null||head.next==null)
+            return head;
+        Node newHead = reverse1(head.next);
+        Node temp=head.next;
+        temp.next=head;
+        head.next=null;
+        return newHead;
+    }
+
+    /**
      * 将两个有序的链表合并
      * @param list1
      * @param list2
@@ -280,15 +293,27 @@ public class LinkListDemo {
 
         node.next=node1;
         node1.next=node2;
-
+        node2.next=node3;
         node3.next=node4;
         node4.next=node5;
 
-        Node node6 = list.mergeListDigui(node, node4);
-        while(node6!=null){
-            System.out.println(node6);
-            node6=node6.next;
+//        while (node!=null){
+//            System.out.println(node);
+//            node=node.next;
+//        }
+        System.out.println("逆序后");
+        Node reserv = list.reverse1(node);
+
+        while (reserv!=null){
+            System.out.println(reserv);
+            reserv=reserv.next;
         }
+
+//        Node node6 = list.mergeListDigui(node, node4);
+//        while(node6!=null){
+//            System.out.println(node6);
+//            node6=node6.next;
+//        }
 
 
 //        final int allNodeNumber = list.getAllNodeNumber();

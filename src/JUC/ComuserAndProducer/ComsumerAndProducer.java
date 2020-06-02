@@ -17,7 +17,6 @@ class CandP{
     public void increament() throws InterruptedException {
         lock.lock();
         try{
-
             while(num!=0){
                 condition.await();
             }

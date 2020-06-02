@@ -18,7 +18,6 @@ class CandP1 {
         System.out.println(Thread.currentThread().getName() + " 线程生产了,还剩下: " + num);
         this.notifyAll();
 
-
     }
 
     public synchronized void decreament() throws InterruptedException {
