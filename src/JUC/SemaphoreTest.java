@@ -4,9 +4,25 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
 
+
+class CountDownLatchTest{
+    public static void main(String[] args) throws InterruptedException {
+        CountDownLatch countDownLatch=new CountDownLatch(5);
+
+        for (int i = 0; i < 5; i++) {
+            new Thread(()->{
+                System.out.println(Thread.currentThread().getName());
+                countDownLatch.countDown();
+            },i+"").start();
+        }
+        countDownLatch.await();
+        System.out.println("关闭大门");
+    }
+}
 public class SemaphoreTest {
 
 

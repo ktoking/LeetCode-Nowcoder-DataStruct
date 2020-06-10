@@ -33,4 +33,25 @@ public class FastSort {
         arr[low]=temp;
         return low;
     }
+
+    public static void quickSort1(int[] arr,int low,int high){
+        if(low<high){
+            int index=getIndex1(arr, low, high);
+            quickSort1(arr, low, index-1);
+            quickSort1(arr, index+1, high);
+        }
+    }
+    public static int getIndex1(int[] arr,int low,int high){
+        int temp = arr[low];
+        while(low<high){
+            while (low<high&&arr[high]>temp)
+                high--;
+            arr[low]=arr[high];
+            while (low<high&&arr[low]<temp)
+                low++;
+            arr[high]=arr[low];
+        }
+        arr[low]=temp;
+        return low;
+    }
 }
