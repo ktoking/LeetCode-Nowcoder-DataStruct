@@ -1,5 +1,5 @@
 # LeetCode-Nowcoder-DataStruct
-记录日常刷题与数据结构,包含以下 个大包
+记录日常刷题与数据结构,包含以下六个大包
 
 ### 一. BUFFcode 记录牛客网的刷题记录
 
