@@ -70,4 +70,23 @@ public class Test_5_9__1 {
         }
         throw new IllegalArgumentException("No two sum solution");
     }
+
+    /**
+     * 再写一遍
+     * @param nums
+     * @param target
+     * @return
+     */
+    public static int[] twoSum11(int[] nums, int target){
+        Map<Integer,Integer> map=new HashMap(); //用hashmap将值与下标联合起来
+        for (int i = 0; i < nums.length; i++) { //每进行一次遍历,我们取出数组中的值,我们将target减去数组的值作为key,看map中有没有存在
+            int com=target-nums[i];
+            if(map.containsKey(com)){   //如果包含,加入到数组中
+                return new int[]{map.get(com),i};
+            }
+            map.put(nums[i],i);
+        }
+        throw new IllegalArgumentException("No two sum solution");
+    }
+
 }
