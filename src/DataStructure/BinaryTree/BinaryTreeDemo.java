@@ -134,7 +134,7 @@ public class BinaryTreeDemo {
     public NodeDemo midSearch(int num){
         NodeDemo nodeDemo=null;
         if(this.left!=null){
-            nodeDemo = this.left.preSearch(num);
+            nodeDemo = this.left.midSearch(num);
         }
         if(nodeDemo!=null) return nodeDemo;
 
@@ -143,7 +143,7 @@ public class BinaryTreeDemo {
         }
 
         if(this.right!=null){
-            nodeDemo = this.right.preSearch(num);
+            nodeDemo = this.right.midSearch(num);
         }
         return nodeDemo;
     }
@@ -152,12 +152,12 @@ public class BinaryTreeDemo {
     public NodeDemo postSearch(int num){
         NodeDemo nodeDemo=null;
         if(this.left!=null){
-            nodeDemo = this.left.preSearch(num);
+            nodeDemo = this.left.postSearch(num);
         }
         if(nodeDemo!=null) return nodeDemo;
 
         if(this.right!=null){
-            nodeDemo = this.right.preSearch(num);
+            nodeDemo = this.right.postSearch(num);
         }
         if(this.num==num){
             return this;

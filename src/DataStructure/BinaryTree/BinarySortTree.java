@@ -1,5 +1,8 @@
 package DataStructure.BinaryTree;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 /**
  * 二叉排序数
  */
@@ -73,6 +76,8 @@ class Node{
         if(this.right!=null) this.right.post();
         System.out.println(this);
     }
+
+
 }
 
 /**
@@ -93,6 +98,26 @@ class BinarySortTree1{
         if(root!=null) root.midPrt();
         else System.out.println("节点为空");
     }
+
+    //层序遍历
+    public void cengxu(){
+        Node node=root;
+        Queue<Node> queue = new LinkedList<>();
+        if(node==null) return;
+        queue.offer(node);
+        while(!queue.isEmpty()){
+            System.out.println(queue.peek());
+            if(queue.peek().getLeft()!=null){
+                queue.offer(queue.peek().getLeft());
+            }
+            if(queue.peek().getRight()!=null){
+                queue.offer(queue.peek().getRight());
+            }
+            queue.poll();
+        }
+    }
+
+
 }
 
 public class BinarySortTree {
@@ -105,5 +130,9 @@ public class BinarySortTree {
         }
         System.out.println("构造后的二叉树中序遍历为:");
         binarySortTree1.midPtf();
+
+        System.out.println("层序遍历为: ");
+        binarySortTree1.cengxu();
+
     }
 }
