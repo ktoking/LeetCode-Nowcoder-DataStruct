@@ -24,12 +24,8 @@ class CountDownLatchTest{
     }
 }
 public class SemaphoreTest {
-
-
     public static void main(String[] args) {
         Semaphore semaphore=new Semaphore(2);
-
-
 
         List list=new ArrayList();
         for (int i = 0; i < 6; i++) {
