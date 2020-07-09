@@ -83,14 +83,70 @@ public class StackModelQueue {
         }
 
     public static void main(String[] args) {
-        StackModelQueue stackModelQueue=new StackModelQueue();
+//        StackModelQueue stackModelQueue=new StackModelQueue();
+//        stackModelQueue.push(1);
+//        stackModelQueue.push(2);
+//        stackModelQueue.push(3);
+//        stackModelQueue.pop();
+//        stackModelQueue.pop();
+//        stackModelQueue.clear();
+//        stackModelQueue.size();
+
+        StackModelQueue1 stackModelQueue=new StackModelQueue1();
+
         stackModelQueue.push(1);
         stackModelQueue.push(2);
         stackModelQueue.push(3);
-        stackModelQueue.pop();
-        stackModelQueue.pop();
+        System.out.println(stackModelQueue.pop());
+        System.out.println(stackModelQueue.pop());
         stackModelQueue.clear();
-        stackModelQueue.size();
+        stackModelQueue.push(1);
+        stackModelQueue.push(2);
+        stackModelQueue.push(3);
+        System.out.println(stackModelQueue.pop());
+        System.out.println(stackModelQueue.peek());
+        System.out.println(stackModelQueue.peek());
+        stackModelQueue.push(4);
+        System.out.println(stackModelQueue.pop());
+        System.out.println(stackModelQueue.peek());
+        System.out.println(stackModelQueue.pop());
+        System.out.println(stackModelQueue.pop());
+        System.out.println(stackModelQueue.pop());
+        System.out.println(stackModelQueue.size());
+    }
+
+}
+class  StackModelQueue1{
+    private Stack<Integer> stack1=new Stack();
+    private Stack<Integer> stack2=new Stack();
+
+    void push(int val){
+        stack1.push(val);
+    }
+    int pop(){
+        if(stack1.isEmpty()&&stack2.isEmpty()) return -1;
+        if(stack2.isEmpty()){
+            while (!stack1.isEmpty()){
+                stack2.push(stack1.pop());
+            }
+        }
+        return stack2.pop();
+    }
+    int peek(){
+        if(stack1.isEmpty()&&stack2.isEmpty()) return -1;
+        if(stack2.isEmpty()){
+            while (!stack1.isEmpty()){
+                stack2.push(stack1.pop());
+            }
+        }
+        return stack2.peek();
+    }
+    int size(){
+        return stack1.size()+stack2.size();
+    }
+    void clear(){
+        stack1.clear();
+        stack2.clear();
     }
 
 }

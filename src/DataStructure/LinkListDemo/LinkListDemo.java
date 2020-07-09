@@ -65,7 +65,7 @@ class LinkedListDemo{
         boolean flag=false; //判断是否重复添加
         while (true){  //查找该插入的节点位置
             if(temp.next==null){ //在链表最后
-              break;
+                break;
             }
             if(node.no<temp.next.no){  //这里需要找到temp的下一个位置与插入的node比较,比temp的下一个元素小,那就可以插入到temp后面
                 break; //位置已经找到
