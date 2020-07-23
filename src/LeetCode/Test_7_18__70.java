@@ -24,7 +24,7 @@ package LeetCode;
  2.  1 阶 + 2 阶
  3.  2 阶 + 1 阶
  */
-public class Test_7_18_70 {
+public class Test_7_18__70 {
 
     public static void main(String[] args) {
         System.out.println(climbStairs(5));
