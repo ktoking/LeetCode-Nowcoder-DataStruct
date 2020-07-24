@@ -52,7 +52,7 @@ public class Offer_7_24_12 {
     public static boolean dfs(char[][] board,char[] words,int i,int j,int k){
         if(i<0||j<0||i>board.length-1||j>board[0].length-1||words[k]!=board[i][j]||board[i][j]=='/')return false;
         if(k==words.length-1)return true;
-
+        
         char temp=board[i][j];
         board[i][j]='/';
         boolean res=dfs(board,words,i-1,j,k+1)||
