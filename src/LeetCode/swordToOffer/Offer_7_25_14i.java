@@ -71,4 +71,24 @@ public class Offer_7_25_14i {
         else return (int) (Math.pow(3,x)*y);
     }
 
+    /**
+     * dp动态规划
+     * @param n
+     * @return
+     */
+    public static int integerBreak1(int n){
+        if(n<=3) return n-1;
+        int dp[]=new int[n+1];
+        //1,2,3怎么来的,dp[4]=Max{dp[3]*1,dp[2}*2,dp[1]*3}所以初始值为1,2,3
+        dp[1]=1;
+        dp[2]=2;
+        dp[3]=3;
+        //dp[n] = Max(dp[n - 1] * 1, dp[n - 2] * 2，dp[n - 3] * 3 ....,dp[1] * (n - 1))
+        for (int i = 3; i <= n; i++) { //i代表每一趟最大值下标
+            for (int j = 1; j < i; j++) { //j代表,每一趟可能的下标值,每一躺都得利用公式去找前面的值
+                dp[i]=Math.max(dp[i],j*dp[i-j]);
+            }
+        }
+        return dp[n];
+    }
 }
