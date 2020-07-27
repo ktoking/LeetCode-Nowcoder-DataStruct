@@ -1,4 +1,4 @@
-package LeetCode.swordToOffer;
+package LeetCode;
 
 /**
  * 给出一个 32 位的有符号整数，你需要将这个整数中每位上的数字进行反转。
@@ -23,18 +23,13 @@ package LeetCode.swordToOffer;
  * 链接：https://leetcode-cn.com/problems/reverse-integer
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
-public class Offer_7_27_16 {
+public class Test_7_27__7 {
     public int reverse(int x) {
-        int rtVal=0;
-        while (x!=0){
-            if((rtVal*10)/10==rtVal){
-                rtVal=0;
-                break;
-            }
-            rtVal=rtVal*10+x%10;
-            x/=10;
+        long n = 0;
+        while(x != 0) {
+            n = n*10 + x%10;
+            x = x/10;
         }
-        return rtVal;
+        return (int)n==n? (int)n:0;
     }
-
 }
