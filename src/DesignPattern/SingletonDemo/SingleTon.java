@@ -1,4 +1,4 @@
-package DesignPatterns.SingletonDemo;
+package DesignPattern.SingletonDemo;
 
 /**
  * 单例模式 DCL双端校验锁
