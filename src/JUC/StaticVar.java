@@ -29,9 +29,9 @@ class Mysour{
 public class StaticVar {
     public static void main(String[] args) throws InterruptedException {
         Mysour m=new Mysour();
-        for (int i = 0; i < 1000; i++) { //1000个线程自增,绝大部分都到不了1000
+        for (int i = 0; i < 40000; i++) { //40000个线程自增,绝大部分都到不了40000
             new Thread(()->{
-               m.incrSync();
+               m.incrLock();
             },""+i).start();
         }
 
