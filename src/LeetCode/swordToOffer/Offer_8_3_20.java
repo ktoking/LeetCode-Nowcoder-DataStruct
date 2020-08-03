@@ -9,7 +9,7 @@ package LeetCode.swordToOffer;
  * 注意：本题与主站 65 题相同：https://leetcode-cn.com/problems/valid-number/
  */
 public class Offer_8_3_20 {
-    
+
     public boolean isNumber(String s) {
         if(s == null || s.length() == 0){
             return false;
