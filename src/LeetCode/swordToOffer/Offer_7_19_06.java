@@ -34,6 +34,7 @@ public class Offer_7_19_06 {
         ListNode temp=head;
         while (temp!=null){
             temp=temp.next;
+            count++;
         }
         int[] arr=new int[count];
         for (int i = 0; i < count; i++) {
