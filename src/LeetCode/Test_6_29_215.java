@@ -66,4 +66,35 @@ public class Test_6_29_215 {
     }
 
 
+    /**
+     * 再写一遍 （未优化思路）最基本的思想，快排思想，记住要从大到小才可以找到k大，数组是从0开始的没有第0大，所以要k-1
+     * @param nums
+     * @param k
+     * @return
+     */
+    public int findKthLargest1(int[] nums, int k) {
+        if(nums.length==0||nums==null) return -1;
+        return get(nums,0,nums.length-1,k-1);
+    }
+
+    public int get(int[] arr,int low,int high,int k){
+            int index=getIndex1(arr,low,high);
+            if(index==k) return arr[index];
+            else if(index>k){
+                return get(arr,low,index-1,k);
+            }else return get(arr,index+1,high,k);
+    }
+
+    public int getIndex1(int[] arr,int low,int high){
+        int temp=arr[low];
+        while (low<high){
+            while (low<high&&arr[high]<=temp) high--;
+            arr[low]=arr[high];
+            while (low<high&&arr[low]>=temp) low++;
+            arr[high]=arr[low];
+        }
+        arr[low]=temp;
+        return low;
+    }
+
 }
