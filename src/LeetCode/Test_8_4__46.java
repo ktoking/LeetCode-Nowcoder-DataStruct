@@ -28,12 +28,14 @@ import java.util.List;
  * 全排列不去重
  */
 public class Test_8_4__46 {
+    /**
+     * 经典做法全排列
+     */
     List<List<Integer>> listAll=new ArrayList<>();
     public List<List<Integer>> permute(int[] nums) {
         quan(nums,0);
         return listAll;
     }
-
     public void quan(int[] nums,int start){
         if(start==nums.length){
             List<Integer> list=new ArrayList<>();
@@ -48,10 +50,31 @@ public class Test_8_4__46 {
             swap(nums,i,start);
         }
     }
-
     public void swap(int[] nums,int i,int j){
         int temp=nums[i];
         nums[i]=nums[j];
         nums[j]=temp;
     }
+
+    /**
+     * 回溯模板全排列 没有重复数字
+     */
+    List<List<Integer>> lists=new ArrayList<>();
+    public List<List<Integer>> permute1(int[] nums) {
+        huisu(nums,new ArrayList<>());
+        return lists;
+    }
+    public void huisu(int[] nums,List<Integer>list){
+        if(list.size()==nums.length){
+            lists.add(new ArrayList<>(list));
+            return;
+        }
+        for (int i = 0; i < nums.length; i++) {
+            if(list.contains(nums[i]))continue;
+            list.add(nums[i]);
+            huisu(nums,list);
+            list.remove(list.size()-1);
+        }
+    }
+
 }
