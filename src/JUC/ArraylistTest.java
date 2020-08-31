@@ -6,6 +6,10 @@ import java.util.concurrent.CopyOnWriteArrayList;
 public class ArraylistTest {
 
 
+    /**
+     * List不能在遍历的时候修改结构,并发修改异常
+     * @param args
+     */
     public static void main(String[] args) {
 
        HashMap hashMap=new HashMap();
