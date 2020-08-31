@@ -1,5 +1,7 @@
 package DesignPattern.SingletonDemo;
 
+import JUC.Singleton;
+
 /**
  * 单例模式 DCL双端校验锁
  */
