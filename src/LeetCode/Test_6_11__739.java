@@ -52,6 +52,24 @@ public class Test_6_11__739 {
         return arr;
     }
 
+    /**
+     * 再写一遍单调栈
+     * @param T
+     * @return
+     */
+    public int[] dailyTemperatures12(int[] T) {
+        int[] arr=new int[T.length];
+        Stack<Integer> stack=new Stack<>();
+        for (int i = 0; i < T.length; i++) {
+            while (!stack.isEmpty()&&T[i]>T[stack.peek()]){
+                int pop = stack.pop();
+                arr[pop]=i-pop;
+            }
+            stack.push(i);
+        }
+        return arr;
+    }
+
 
 
 

@@ -1,6 +1,8 @@
 package LeetCode;
 
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 /**
  * 841. 钥匙和房间
@@ -36,21 +38,53 @@ import java.util.List;
  * 所有房间中的钥匙数量总计不超过 3000。
  */
 public class Test_8_31__841 {
-    public static boolean canVisitAllRooms(List<List<Integer>> rooms) {
-        return get(rooms,0);
+
+    /**
+     * DFS深度优先遍历,访问每一个房间,只要全访问过了就返回true
+     */
+    boolean[] flag;
+    int num;
+    public  boolean canVisitAllRooms(List<List<Integer>> rooms) {
+        flag=new boolean[rooms.size()];
+        num=0;
+        dfs(rooms,0);
+        return num==rooms.size();
     }
-    public static boolean get(List<List<Integer>> rooms,int size){
-        if(rooms.size()>=size) return true;
+    public  void dfs(List<List<Integer>> rooms,int size){
+        flag[size]=true;
+        num++;
         for (int i = 0; i < rooms.get(size).size(); i++) {
-            int size1=size++;
-            if(rooms.get(size).get(i)==size1){
-                return get(rooms,size1);
-            }else {
-                return false;
+            if(!flag[rooms.get(size).get(i)]){
+                dfs(rooms,rooms.get(size).get(i));
             }
         }
-        return false;
     }
+
+    /**
+     * BFS广度优先试试
+     * @param rooms
+     * @return
+     */
+    public  boolean canVisitAllRoomsBFS(List<List<Integer>> rooms) {
+        int all=0;
+        Queue<Integer> queue=new LinkedList<>();
+        queue.offer(0);
+        boolean[] visit=new boolean[rooms.size()];
+        visit[0]=true;
+        while (!queue.isEmpty()){
+            int poll = queue.poll();
+            all++;//只有到达新房间计数器才+1
+            for (int room:rooms.get(poll)) {//遍历房间,将没访问过的加入队列,并且设置已访问过
+                if(!visit[room]){
+                    visit[room]=true;
+                    queue.offer(room);
+                }
+            }
+        }
+        return rooms.size()==all;
+    }
+
+
 
     public boolean canVisitAllRooms1(List<List<Integer>> rooms) {
         if(rooms == null || rooms.size() == 0){
