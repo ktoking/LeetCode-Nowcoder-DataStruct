@@ -35,7 +35,41 @@ package LeetCode;
 public class Test_9_8__79 {
 
     /**
-     * dfs+简单回溯 超时!!! 需要剪枝
+     * 回溯不超时,每个字母对比,并且利用特殊字符.记录,不符合的回溯回去,单词搜索
+     * @param board
+     * @param word
+     * @return
+     */
+    public boolean exist1(char[][] board, String word) {
+       if(board.length==0||board==null) return false;
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board[0].length; j++) {
+                if(huisu(board,word.toCharArray(),i,j,0)){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    public boolean huisu(char[][] board,char[] words,int i,int j,int index){
+        if(i<0||i>board.length-1||j<0||j>board[0].length-1||board[i][j]!=words[index]){
+            return false;
+        }
+        if(index==words.length-1){
+            return true;
+        }
+        char c=board[i][j];
+        board[i][j]='.';
+        boolean res=huisu(board,words,i+1,j,index+1)||
+                huisu(board,words,i,j+1,index+1)||
+                huisu(board,words,i-1,j,index+1)||
+                huisu(board,words,i,j-1,index+1);
+        board[i][j]=c; //回溯
+        return res;
+    }
+
+    /**
+     * dfs+简单回溯 超时!!! 需要特殊回溯,每次对比相同字符,不能等长度相同再对比
      * @param board
      * @param word
      * @return
@@ -52,7 +86,6 @@ public class Test_9_8__79 {
         }
         return false;
     }
-
     public static boolean dfs(char[][] chars,String word,boolean[][] vis,int i,int j,String cur){
         if(i<0||i>=chars.length||j<0||j>=chars[0].length||vis[i][j]||cur.length()>word.length()){
             return false;
@@ -60,7 +93,6 @@ public class Test_9_8__79 {
         vis[i][j]=true;
         cur+=chars[i][j];
         if(cur.equals(word))return true;
-
         if(dfs(chars, word, vis, i + 1, j, cur)||
         dfs(chars, word, vis, i, j + 1, cur)||
         dfs(chars, word, vis, i - 1, j, cur)||
