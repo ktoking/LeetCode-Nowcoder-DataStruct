@@ -54,4 +54,26 @@ public class Offer_7_30_48 {
         }
         return count;
     }
+
+    /**
+     * 最长不含重复字符的子字符串,再写一遍
+     * @param s
+     * @return
+     */
+    public int lengthOfLongestSubstring1(String s) {
+        if(s.length()==0||s==null) return 0;
+        int count=0,right=0;
+        Set<Character> set=new HashSet<>();
+        for (int i = 0; i < s.length(); i++) {
+            if(i!=0){
+                set.remove(s.charAt(i-1));
+            }
+            while (right<s.length()&&!set.contains(s.charAt(right))){
+                set.add(s.charAt(right));
+                right++;
+            }
+            count=Math.max(count,right-i);
+        }
+        return count;
+    }
 }
