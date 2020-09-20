@@ -27,6 +27,25 @@ import java.util.List;
 public class Test_8_26__78 {
 
     /**
+     * 回溯子集大法,再写一遍
+     * @param nums
+     * @return
+     */
+    List<List<Integer>> lists1=new ArrayList<>();
+    public List<List<Integer>> subsets11(int[] nums) {
+        huisu(new ArrayList<>(),nums,0);
+        return lists1;
+    }
+    public void huisu(List<Integer>list,int[] nums,int index){
+        lists1.add(new ArrayList<>(list));
+        for (int i = index; i < nums.length ; i++) {
+            list.add(nums[i]);
+            huisu(list,nums,i+1);
+            list.remove(list.size()-1);
+        }
+    }
+
+    /**
      * 迭代枚举
      * @param nums
      * @return
