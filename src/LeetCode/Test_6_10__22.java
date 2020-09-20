@@ -96,9 +96,8 @@ public class Test_6_10__22 {
         if(count1>n||count2>n)return; //递归结束条件 当左括号数量大于n或右括号的数量大于n就返回
         if(count1==n&&count2==n) res.add(ans); //当左括号的数量与与右括号的数量都等于n才加入list
         if(count1>=count2){
-            String ans1=new String(ans);
-            generate(res,ans1+"(",count1+1,count2,n); //添加( 将左括号数量+1 递归
-            generate(res,ans1+")",count1,count2+1,n); //添加) 将右括号数量+1 递归
+            generate(res,ans+"(",count1+1,count2,n); //添加( 将左括号数量+1 递归
+            generate(res,ans+")",count1,count2+1,n); //添加) 将右括号数量+1 递归
         }
     }
 
