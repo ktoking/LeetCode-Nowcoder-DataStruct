@@ -78,5 +78,19 @@ public class Offer_7_31_29 {
             return rtVal;
     }
 
+    /**
+     * 回型 顺时针打印矩阵
+     * @param matrix
+     */
+    public static void shunshizhen1(int[][] matrix) {
+        int t=0,r=matrix[0].length-1,b=matrix.length-1,l=0,index=1;
+        while (true){
+            for (int i = l; i <= r ; i++){matrix[t][i]=index++;} if(++t>b) break;
+            for (int i = t; i <= b ; i++){matrix[i][r]=index++;} if(--r<l) break;
+            for (int i = r; i >= l ; i--){matrix[b][i]=index++;} if(--b<t) break;
+            for (int i = b; i >= t ; i--){matrix[i][l]=index++;} if(++l>r) break;
+        }
+    }
+
 }
 
