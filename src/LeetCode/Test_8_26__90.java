@@ -45,6 +45,6 @@ public class Test_8_26__90 {
         }
     }
     public static void main(String[] args) {
-        System.out.println(subsetsWithDup(new int[]{0}));
+        System.out.println(subsetsWithDup(new int[]{2,2,2}));
     }
 }
