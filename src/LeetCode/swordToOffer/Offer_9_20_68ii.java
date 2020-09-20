@@ -61,8 +61,8 @@ public class Offer_9_20_68ii {
         TreeNode left = lowestCommonAncestor(root.left, p, q);
         TreeNode right = lowestCommonAncestor(root.right, p, q);
         if(left == null && right == null) return null; // 1.
-        if(left==null) return right;
-        else if(right==null) return left;
-        return root;
+        if(left==null) return right; //3
+        if(right==null) return left;//4
+        return root; //2
     }
 }
