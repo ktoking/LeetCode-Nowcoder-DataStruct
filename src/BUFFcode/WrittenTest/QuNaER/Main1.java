@@ -3,6 +3,10 @@ package BUFFcode.WrittenTest.QuNaER;
 import java.util.Scanner;
 
 public class Main1 {
+    /**
+     * 最长公共子序列 lcs
+     * @param args
+     */
     public static void main(String[] args) {
         Scanner scanner=new Scanner(System.in);
         int nextInt = Integer.parseInt(scanner.nextLine());
