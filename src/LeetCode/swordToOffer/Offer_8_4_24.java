@@ -1,5 +1,7 @@
 package LeetCode.swordToOffer;
 
+import java.util.List;
+
 /**
  * 剑指 Offer 24. 反转链表
  * 定义一个函数，输入一个链表的头节点，反转该链表并输出反转后链表的头节点。
@@ -67,5 +69,26 @@ public class Offer_8_4_24 {
             cur=nextn;
         }
         return pre;
+    }
+
+    /**
+     * 两两反转链表
+     * @param head
+     * @return
+     */
+    public ListNode swapPairs(ListNode head){
+        if(head==null) return head;
+        ListNode temp=new ListNode(-1);
+        temp.next=head;
+        head=temp;
+        while (head.next!=null&&head.next.next!=null){
+            ListNode a=head.next;
+            ListNode b=a.next;
+            head.next=b;
+            a.next=b.next;
+            b.next=a;
+            head=a;
+        }
+        return temp.next;
     }
 }
