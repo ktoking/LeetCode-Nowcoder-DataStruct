@@ -50,6 +50,38 @@ public class Test_8_21__5 {
         return i>j?true:false;
     }
 
+    /**
+     * 中心扩散算法
+     * @param s
+     * @return
+     */
+    public static String longestPalindrome1(String s) {
+        if(s.length()==0||s==null) return "";
+        int left=0,maxS=0,right=0,maxLen=0,len=1;
+        for (int i = 0; i < s.length(); i++) {
+            left=i-1;
+            right=i+1;
+            while (left>=0&&s.charAt(i)==s.charAt(left)){
+                left--;
+                len++;
+            }
+            while (right<s.length()&&s.charAt(right)==s.charAt(i)){
+                right++;
+                len++;
+            }
+            while (left>=0&&right<s.length()&&s.charAt(left)==s.charAt(right)){
+                len+=2;
+                left--;
+                right++;
+            }
+            if(len>maxLen){
+                maxLen=len;
+                maxS=left;
+            }
+            len = 1;
+        }
+        return s.substring(maxS+1,maxS+maxLen+1);
+    }
 
 
 }
