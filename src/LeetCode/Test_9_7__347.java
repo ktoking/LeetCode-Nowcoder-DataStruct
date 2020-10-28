@@ -32,7 +32,7 @@ import java.util.stream.IntStream;
  */
 public class Test_9_7__347 {
     public static void main(String[] args) {
-        int[] ints = topKFrequent(new int[]{1, 1, 1, 2, 2, 3}, 2);
+        int[] ints = topKFrequent1(new int[]{4,1,-1,2,-1,2,3 },2);
         for (int anInt : ints) {
             System.out.println(anInt);
         }
@@ -65,6 +65,35 @@ public class Test_9_7__347 {
         int i=0;
         for (Integer integer : queue) {
             arr[i++]=integer;
+        }
+        return arr;
+    }
+
+
+    /**
+     * 再写一遍前K高频
+     * @param nums
+     * @param k
+     * @return
+     */
+    public static int[] topKFrequent1(int[] nums, int k) {
+        Map<Integer, Integer> collect = IntStream.of(nums).boxed().collect(Collectors.toMap(e -> e, e -> 1, (n1, n2) -> {
+            return n1 + n2;
+        }));
+        Queue<Map.Entry> queue=new PriorityQueue<>(k,((o1, o2) -> {return (int)o1.getValue()-(int)o2.getValue();}));
+        for (Map.Entry<Integer, Integer> entry : collect.entrySet()) {
+            if(queue.size()==k){
+               if((int)queue.peek().getValue()<entry.getValue()){
+                   queue.poll();
+                   queue.offer(entry);
+               }
+            }else {
+                queue.offer(entry);
+            }
+        }
+        int[] arr=new int[k];
+        for (int i = 0; i < k; i++) {
+            arr[i]=(int)queue.poll().getKey();
         }
         return arr;
     }
