@@ -202,4 +202,74 @@ public class Test_5_25__146 {
 
 }
 
+class LRUCache2{
+    int size; //当前容量
+    int capacity; //最大容量
+    DoubleList head; //头指针
+    DoubleList tail; //尾指针
+    Map<Integer,DoubleList> map=new HashMap<>(); //hash快速查找
+
+    public LRUCache2(int capacity) {
+        this.capacity = capacity;
+        size=0;
+        head=new DoubleList();
+        tail=new DoubleList();
+        head.next=tail;
+        tail.pre=head;
+    }
+
+    public int get(int key) {
+        if(!map.containsKey(key)){
+            return -1;
+        }else {
+            DoubleList doubleList = map.get(key);
+            removeToHead(doubleList);
+            return doubleList.value;
+        }
+    }
+
+    public void put(int key, int value) {
+        if(map.containsKey(key)){
+            DoubleList doubleList = map.get(key);
+            doubleList.value=value;
+            removeToHead(doubleList);
+        }else {
+            //若不存在,先加入hashmap里面
+            DoubleList doubleList=new DoubleList(key,value);
+            map.put(key,doubleList);
+            //然后判断容量大小
+            if(size++>capacity){
+                DoubleList doubleList1 = removeTail();
+                map.remove(doubleList1);
+                size--;
+            }
+            size++;
+            addToHead(doubleList);
+        }
+    }
+
+    public void deleteNode(DoubleList node){
+        node.pre.next=node.next;
+        node.next.pre=node.pre;
+    }
+    public void addToHead(DoubleList node){
+        node.next=head.next;
+        head.next=node;
+        head.next.next.pre=head.next;
+        head.next.pre=head;
+    }
+    public void removeToHead(DoubleList node){
+        deleteNode(node);
+        addToHead(node);
+    }
+    public DoubleList removeTail(){
+        DoubleList node=tail.pre;
+        deleteNode(node);
+        return node;
+    }
+
+
+
+}
+
 
