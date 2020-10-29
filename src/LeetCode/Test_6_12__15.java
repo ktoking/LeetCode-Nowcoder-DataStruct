@@ -37,7 +37,7 @@ public class Test_6_12__15 {
      * @param nums
      * @return
      */
-public static List<List<Integer>> threeSum(int[] nums) {
+    public static List<List<Integer>> threeSum(int[] nums) {
         Arrays.sort(nums);  //首先排序数组
         List<List<Integer>> lists=new ArrayList<>(); //题解list
         if(nums.length<3) return lists; //如果数组长度不符合直接返回
@@ -59,6 +59,31 @@ public static List<List<Integer>> threeSum(int[] nums) {
                 }else if(nums[left]+nums[right]>target){    //如果大于想要的值,那我们就将右指针向左移动一次
                     right--;
                 }else left++;                                //相同,如果小于我们要的值.那就左指针向右移动
+            }
+        }
+        return lists;
+    }
+
+    public static List<List<Integer>> threeSum1(int[] nums) {
+        Arrays.sort(nums);
+        List<List<Integer>> lists=new ArrayList<>();
+        if(nums.length<3) return lists;
+        for (int i = 0; i < nums.length; i++) {
+            if(i>0&&nums[i]==nums[i-1]) continue;
+            int l=i+1,r=nums.length-1;
+            while (l<r){
+                if(nums[l]+nums[r]==-nums[i]){
+                    List<Integer> list=new ArrayList<>();
+                    list.add(nums[i]);
+                    list.add(nums[r]);
+                    list.add(nums[l]);
+                    lists.add(list);
+                    l++;r--;
+                    while (l<r&&nums[l-1]==nums[l]) l++;
+                    while (r>l&&nums[r+1]==nums[r]) r--;
+                }else if(nums[l]+nums[r]>-nums[i]){
+                  r--;
+                }else l++;
             }
         }
         return lists;
