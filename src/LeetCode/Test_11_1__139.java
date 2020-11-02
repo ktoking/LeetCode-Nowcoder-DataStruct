@@ -1,9 +1,6 @@
 package LeetCode;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * 139. 单词拆分
@@ -58,5 +55,28 @@ public class Test_11_1__139 {
             }
         }
         return false;
+    }
+
+    /**
+     * 动态规划, diganddig
+     *           j  i
+     *           我们判断dp[i]表示是否能划分i之前的单词，j-i的后缀是否在字符串数组中
+     * @param s
+     * @param wordDict
+     * @return
+     */
+    public static boolean wordBreak1(String s, List<String> wordDict) {
+        Set<String> set=new HashSet<>(wordDict);
+        boolean[] dp=new boolean[s.length()+1];
+        dp[0]=true;
+        for (int i = 1; i <= s.length(); i++) {
+            for (int j = 0;j<i;j++) {
+                if(dp[j]&&set.contains(s.substring(j,i))){
+                    dp[i]=true;
+                    break;
+                }
+            }
+        }
+        return dp[s.length()];
     }
 }
