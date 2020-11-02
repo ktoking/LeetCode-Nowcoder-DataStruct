@@ -59,4 +59,30 @@ public class Test_11_1__139 {
         }
         return false;
     }
+
+    /**
+     * 增加一个booleanboolean数组表示当前位置之后的字符串是否遍历过了，如果遍历过了并且没有提前递归的返回truetrue说明，这个位置后面的匹配是不会成功的，因此直接返回falsefalse。
+     *
+     * 作者：outvoker-c
+     * 链接：https://leetcode-cn.com/problems/word-break/solution/javahui-su-dao-ji-yi-hua-hui-su-zai-dao-dong-tai-g/
+     * 来源：力扣（LeetCode）
+     * 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+     */
+    boolean[] mem;
+    public boolean backtrack(String s, int start, Set<String> set) {
+        if (s.length() == 0) return true;
+        if (mem[start]) return false;
+        for (int i = 0; i < s.length(); i++) {
+            if (set.contains(s.substring(0, i + 1))){
+                if (backtrack(s.substring(i + 1), start + i + 1, set)) return true;
+            }
+        }
+        mem[start] = true;
+        return false;
+    }
+    public boolean wordBreak1(String s, List<String> wordDict) {
+        this.mem = new boolean[s.length()];
+        Set<String> set = new HashSet<>(wordDict);
+        return backtrack(s, 0, set);
+    }
 }
