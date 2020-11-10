@@ -54,6 +54,11 @@ package LeetCode;
  * 关于罗马数字的详尽书写规则，可以参考 罗马数字 - Mathematics 。
  */
 public class Test_11_10__13 {
+    /**
+     * 那就每次拿前后字母判断是否大于小于
+     * @param s
+     * @return
+     */
     public int romanToInt(String s) {
         if(s.length()==0||s==null) return 0;
         int value = getValue(s.charAt(0)),sum=0;
