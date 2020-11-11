@@ -32,4 +32,22 @@ public class Offer_8_3_22 {
         return slow;
     }
 
+    /**
+     * 双指针
+     * @param head
+     * @param k
+     * @return
+     */
+    public ListNode getKthFromEnd1(ListNode head, int k) {
+        ListNode f=head,l=head;
+        while (k-->0){
+            f=f.next;
+        }
+        while (f!=null){
+            f=f.next;
+            l=l.next;
+        }
+        return l;
+    }
+
 }
