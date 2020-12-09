@@ -40,6 +40,26 @@ public class Offer_7_19_03 {
 
     }
 
+    /**
+     * 原地置换法
+     * @param nums
+     * @return
+     */
+    public static int findRepeatNumber2(int[] nums){
+        int i = 0;
+        while(i < nums.length) {
+            if(nums[i] == i) {
+                i++;
+                continue;
+            }
+            if(nums[nums[i]] == nums[i]) return nums[i];  // nums[i]代表值表示要放到哪个坑里 ,nums[nums[i]]表示那个坑里是不是已经放了个萝卜
+            int tmp = nums[i];
+            nums[i] = nums[tmp];
+            nums[tmp] = tmp;
+        }
+        return -1;
+    }
+
     public static void main(String[] args) {
         int arr[]={2, 3, 1, 0, 2, 5, 3};
         System.out.println(findRepeatNumber1(arr));
