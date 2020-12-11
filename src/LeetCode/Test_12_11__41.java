@@ -41,10 +41,9 @@ public class Test_12_11__41 {
      * @return
      */
     public int firstMissingPositive(int[] nums) {
-        if(nums.length==0||nums==null) return 1;
         int n=nums.length;
         for (int i = 0; i < nums.length; i++) {
-            if(nums[i]<0) nums[i]= n+1;
+            if(nums[i]<=0) nums[i]= n+1;
         }
         for (int i = 0; i < nums.length; i++) {
            int num=Math.abs(nums[i]);
