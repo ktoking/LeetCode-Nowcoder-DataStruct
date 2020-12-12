@@ -77,4 +77,32 @@ public class Test_8_4__46 {
         }
     }
 
+    public static void main(String[] args) {
+        List<List<Integer>> lists = permute2(new int[]{1, 2, 3});
+        System.out.println(1);
+    }
+
+    /**
+     * 回溯模板再写一遍,使用记录数组区分
+     */
+    static List<List<Integer>> listAll1=new ArrayList<>();
+    public static List<List<Integer>> permute2(int[] nums) {
+        boolean[] vis=new boolean[nums.length];
+        huisu1(nums,new ArrayList<>(),vis);
+        return listAll1;
+    }
+    public static void huisu1(int[] nums,List<Integer>list,boolean[] vis){
+        if(list.size()==nums.length) {
+            listAll1.add(new ArrayList<>(list));
+            return;
+        }
+        for (int i = 0; i < nums.length; i++) {
+            if(vis[i]) continue;
+            vis[i]=true;
+            list.add(nums[i]);
+            huisu1(nums,list,vis);
+            list.remove(list.size()-1);
+            vis[i]=false;
+        }
+    }
 }
