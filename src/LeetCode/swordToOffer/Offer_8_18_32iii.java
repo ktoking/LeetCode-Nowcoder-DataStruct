@@ -61,4 +61,32 @@ public class Offer_8_18_32iii {
         }
         return lists;
     }
+
+    /**
+     * 头插法解决 之字型遍历
+     * @param root
+     * @return
+     */
+    public List<List<Integer>> levelOrder1(TreeNode root) {
+        LinkedList<List<Integer>> lists=new LinkedList<>();
+        if(root==null) return  lists;
+        Queue<TreeNode> queue=new LinkedList<>();
+        queue.offer(root);
+        while (!queue.isEmpty()){
+            LinkedList<Integer> list=new LinkedList<>();
+            int size=queue.size();
+            while (size-->0){
+                TreeNode poll = queue.poll();
+                if(poll.left!=null) queue.offer(poll.left);
+                if(poll.right!=null) queue.offer(poll.right);
+                if(lists.size()%2==1){
+                    list.addFirst(poll.val);
+                }else {
+                    list.addLast(poll.val);
+                }
+            }
+            lists.add(list);
+        }
+        return lists;
+    }
 }
