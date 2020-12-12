@@ -76,4 +76,38 @@ public class Offer_7_30_48 {
         }
         return count;
     }
+
+
+
+    public int lengthOfLongestSubstring2(String s) {
+        Set<Character> set=new HashSet<>();
+        int right=0,max=0;
+        for (int i = 0; i < s.length(); i++) {
+            if(i!=0){
+                set.remove(s.charAt(i-1));
+            }
+            while (right<s.length()&&!set.contains(s.charAt(i))){
+                right++;
+                set.add(s.charAt(right));
+            }
+            max=Math.max(max,right-i);
+        }
+        return max;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
