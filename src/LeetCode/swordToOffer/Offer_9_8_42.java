@@ -94,4 +94,32 @@ public class Offer_9_8_42 {
             }
             return max;
         }
+
+    /**
+     * 连续子数组的最大和
+      * @param nums
+     * @return
+     */
+    public int maxSubArray3(int[] nums) {
+        if(nums.length==0||nums==null) return 0;
+        int plus=0,max=nums[0];
+        for (int num : nums) {
+            if(plus<0) plus=num;
+            else {
+                plus+=num;
+            }
+            max=Math.max(max,plus);
+        }
+        return max;
+    }
+
+
+
+
+
+
+
+
+
+
 }
