@@ -92,5 +92,39 @@ public class Offer_7_31_29 {
         }
     }
 
+
+
+
+
+    public static int[] spiralOrder2(int[][] matrix) {
+        if(matrix==null||matrix.length==0) return new int[]{};
+        int t=0,r=matrix[0].length-1,b=matrix.length-1,l=0,count=0;
+        int[] rst=new int[(r+1)*(b+1)];
+        while (true){
+            for (int i = l; i <=r ; i++) { rst[count++]=matrix[t][i]; } if(++t>b) break;
+            for (int i = t; i <=b ; i++) { rst[count++]=matrix[i][r]; } if(--r<l) break;
+            for (int i = r; i >=l ; i--) { rst[count++]=matrix[b][i]; } if(--b<t) break;
+            for (int i = b; i >=t ; i--) { rst[count++]=matrix[i][l]; } if(++l>r) break;
+        }
+        return rst;
+    }
+
+    public static void main(String[] args) {
+        int[] ints = spiralOrder2(new int[][]{{1, 2, 3}, {8, 9, 4}, {7, 6, 5}});
+        for (int anInt : ints) {
+            System.out.printf("%d ",anInt);
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
 }
 
