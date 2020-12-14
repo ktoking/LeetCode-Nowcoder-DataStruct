@@ -57,4 +57,22 @@ public class Test_9_18__20 {
         return stack.isEmpty();
     }
 
+
+    /**
+     * 括号匹配
+     * @param s
+     * @return
+     */
+    public boolean isValid1(String s) {
+        Stack<Character> stack = new Stack<>();
+        for (Character kuohao : s.toCharArray()) {
+            if(kuohao==')'){ if(stack.isEmpty()||stack.pop()!='(') return false; }
+            else if(kuohao=='}'){ if(stack.isEmpty()||stack.pop()!='{') return false; }
+            else if(kuohao==']'){ if(stack.isEmpty()||stack.pop()!='[') return false; }
+            else stack.push(kuohao);
+        }
+        return stack.isEmpty();
+    }
+
+
 }
