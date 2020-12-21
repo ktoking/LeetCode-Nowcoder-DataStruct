@@ -5,7 +5,7 @@ import java.util.Arrays;
 public class GuiBing {
     public static void main(String[] args) {
         int[] arr={2,3,1,2,3,5,6,2,1};
-        sort(0,arr.length-1,arr);
+        gui(arr,0,arr.length-1);
         Arrays.stream(arr).forEach(value -> System.out.println(value));
     }
     /**
@@ -65,6 +65,51 @@ public class GuiBing {
         }
         while (i<=mid) temp[k++]=arr[i++];
         while (j<=high) temp[k++]=arr[j++];
+        for (int l = 0; l < temp.length; l++) {
+            arr[low++]=temp[l];
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public static void gui(int[] arr,int low,int high){
+        int mid=(low+high)/2;
+        if(low<high){
+            gui(arr,low,mid);
+            gui(arr,mid+1,high);
+            bing(arr,low,mid,high);
+        }
+    }
+
+    public  static void bing(int[] arr,int low,int mid,int high){
+        int k=mid+1,i=low,j=0;
+        int temp[]=new int[high-low+1];
+        while (i<=mid&&k<=high){
+            if(arr[i]>arr[k]){
+                temp[j++]=arr[k++];
+            }else {
+                temp[j++]=arr[i++];
+            }
+        }
+        while (i<=mid) temp[j++]=arr[i++];
+        while (k<=high) temp[j++]=arr[k++];
         for (int l = 0; l < temp.length; l++) {
             arr[low++]=temp[l];
         }
