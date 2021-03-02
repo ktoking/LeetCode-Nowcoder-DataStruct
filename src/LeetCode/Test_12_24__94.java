@@ -24,7 +24,7 @@ import java.util.Stack;
  * 输入：root = [1]
  * 输出：[1]
  */
-public class Test_14_14__94 {
+public class Test_12_24__94 {
 
     /**
      * 非递归中序遍历
