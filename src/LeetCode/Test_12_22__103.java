@@ -56,4 +56,33 @@ public class Test_12_22__103 {
         }
         return lists;
     }
+
+
+    /**
+     * 层序遍历杀我
+     * @param root
+     * @return
+     */
+    public List<List<Integer>> zigzagLevelOrder1(TreeNode root) {
+        List<List<Integer>> lists=new ArrayList<>();
+        if(root==null) return lists;
+        Queue<TreeNode> queue=new LinkedList<>();
+        queue.offer(root);
+        while (!queue.isEmpty()){
+            int size=queue.size();
+            LinkedList<Integer> list=new LinkedList<>();
+            while (size-->0){
+                TreeNode poll = queue.poll();
+                if(poll.left!=null) queue.offer(poll.left);
+                if(poll.right!=null) queue.offer(poll.right);
+                if(lists.size()%2==0){
+                    list.add(poll.val);
+                }else {
+                    list.addFirst(poll.val);
+                }
+            }
+            lists.add(list);
+        }
+        return lists;
+    }
 }
