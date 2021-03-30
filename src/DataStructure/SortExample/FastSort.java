@@ -5,7 +5,8 @@ import java.util.Arrays;
 public class FastSort {
     public static void main(String[] args) {
         int[] arr={2,3,1,2,3,5,6,2,1};
-        fast(0,arr.length-1,arr);
+//        fast(0,arr.length-1,arr);
+        fastS(arr,0,arr.length-1);
         Arrays.stream(arr).forEach(value -> System.out.println(value));
     }
     public static void fast(int low,int high,int[] arr){
@@ -26,4 +27,46 @@ public class FastSort {
         arr[low]=temp;
         return low;
     }
+
+    /**
+     * 快排杀我
+     * @param arr
+     * @param l
+     * @param h
+     */
+    public static void fastS(int[] arr,int l,int h){
+        if(l<h){
+            int index=get(arr,l,h);
+            fastS(arr,l,index-1);
+            fastS(arr,index+1,h);
+        }
+    }
+    public static int get(int[] arr,int l,int h){
+        int temp=arr[l];
+        while (l<h){
+            while (l<h&&arr[h]>=temp) h--;
+            arr[l]=arr[h];
+            while (l<h&&arr[l]<=temp) l++;
+            arr[h]=arr[l];
+        }
+        arr[l]=temp;
+        return l;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
