@@ -78,7 +78,7 @@ public class Test_8_4__46 {
     }
 
     public static void main(String[] args) {
-        List<List<Integer>> lists = permute2(new int[]{1, 2, 3});
+        List<List<Integer>> lists = permute22(new int[]{1, 2, 3});
         System.out.println(1);
     }
 
@@ -105,4 +105,29 @@ public class Test_8_4__46 {
             vis[i]=false;
         }
     }
+
+
+    static List<List<Integer>> listAll11=new ArrayList<>();
+    public static List<List<Integer>> permute22(int[] nums) {
+        boolean[] vis=new boolean[nums.length];
+        huisu11(nums,new ArrayList<>(),vis);
+        return listAll11;
+    }
+    public static void huisu11(int[] nums,List<Integer>list,boolean[] vis){
+        if(list.size()==nums.length){
+            listAll11.add(new ArrayList<>(list));
+            return;
+        }
+        for (int i = 0; i < nums.length; i++) {
+            if(vis[i]) continue;
+            vis[i]=true;
+            list.add(nums[i]);
+            huisu11(nums,list,vis);
+            list.remove(list.size()-1);
+            vis[i]=false;
+        }
+    }
+
+
+
 }
