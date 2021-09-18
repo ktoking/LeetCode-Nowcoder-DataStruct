@@ -16,6 +16,10 @@ public class PeopleInfo {
         this.nation = builder.nation;
     }
 
+    public static PeopleInfo.Builder builder(){
+        return new PeopleInfo.Builder();
+    }
+
     public static final class Builder {
         private  String name;
         private  String gender;
