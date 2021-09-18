@@ -22,8 +22,8 @@ public class ParseJsonToObject {
 
     public static void main(String[] args) throws IOException {
         String path="D:\\Users\\kaiyiwang\\IdeaProjects\\LeetCode-Nowcoder-DataStruct\\src\\main\\java\\Utils\\userList";
-        BufferedReader reader = new BufferedReader(new FileReader(path));//原文出自【易百教程】，商业转载请联系作者获得授权，非商业请保留原文链接：https://www.yiibai.com/java/java-read-file-to-string.html
-        StringBuilder stringBuilder = new StringBuilder();//原文出自【易百教程】，商业转载请联系作者获得授权，非商业请保留原文链接：https://www.yiibai.com/java/java-read-file-to-string.html
+        BufferedReader reader = new BufferedReader(new FileReader(path));
+        StringBuilder stringBuilder = new StringBuilder();
         String line = null;
         String ls = System.getProperty("line.separator");
         while ((line = reader.readLine()) != null) {
