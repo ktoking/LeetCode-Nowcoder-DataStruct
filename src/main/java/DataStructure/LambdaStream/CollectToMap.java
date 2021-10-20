@@ -6,9 +6,8 @@ import com.google.common.collect.Multimap;
 import lombok.Builder;
 import lombok.Data;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 public class CollectToMap {
@@ -77,5 +76,64 @@ public class CollectToMap {
             System.out.println();
         });
         System.out.println();
+
+
+        System.out.println("map6: get specialString");
+        // 又来一个新需求 我们需要将相同key的value集合起来(对象list<Obiect>或者list<string>),并按照指定字符串进行内部排序 例如aa > bb > cc (指定字符) 其他的排在后边
+        List<String> specialString = Lists.newArrayList( "name=cc","sex=dd","name=bb","name=aa", "sex=aa","name=ww");
+
+        Map<String,Integer> keyMap=new HashMap(){{
+           put("aa",1);
+           put("bb",2);
+           put("cc",3);
+        }};
+        Map<String, List<String>> collect5 = specialString.stream().map(e -> { //封装成对象
+            String[] split = e.split("\\=", 2);
+            return ObiectMap.builder().key(split[0]).value(split[1]).build();
+        }).collect(Collectors.groupingBy(ObiectMap::getKey, Collectors.mapping(ObiectMap::getValue, toSortedList((o1, o2) -> { //groupingBy 可以有三个重载方法 三个参数分别是 1.分类器(通过什么方式分类) 2.封装类(默认hashmap 可以传一些其他Collector) 3.收集dowStream (默认tolist)
+            if (keyMap.get(o1) == null) { //Collectors.mapping 返回是一个Collector 里面可以指定通过特定值收集  toSortedList我们自定义一个收集器
+                return 1;
+            } else if (keyMap.get(o2) == null) {
+                return -1;
+            } else if (keyMap.get(o1) == null && keyMap.get(o2) == null) {
+                return 0;
+            }
+            return keyMap.get(o1).compareTo(keyMap.get(o2));
+        }))));
+
+        collect5.forEach((k,v)->{
+            System.out.printf(k+" ");
+            System.out.println(v);
+            System.out.printf(" ");
+            System.out.println();
+        });
+
+        System.out.println("map7: get specialString sort first");
+        Map<String, List<String>> collect6 = specialString.stream().map(e -> { //封装成对象
+            String[] split = e.split("\\=", 2);
+            return ObiectMap.builder().key(split[0]).value(split[1]).build();
+        }).sorted((o1,o2)->{
+            if (keyMap.get(o1.getValue()) == null) {
+                return 1;
+            } else if (keyMap.get(o2.getValue()) == null) {
+                return -1;
+            } else if (keyMap.get(o1.getValue()) == null && keyMap.get(o2.getValue()) == null) {
+                return 0;
+            }
+            return keyMap.get(o1.getValue()).compareTo(keyMap.get(o2.getValue()));
+        }).collect(Collectors.groupingBy(ObiectMap::getKey,LinkedHashMap::new,Collectors.mapping(ObiectMap::getValue,Collectors.toList())));
+
+        collect6.forEach((k,v)->{
+            System.out.printf(k+" ");
+            System.out.println(v);
+            System.out.printf(" ");
+            System.out.println();
+        });
+
+    }
+
+    //收集器 通过传入一个Comparator 接口 来实现一个TreeSet 我们先收集成treemap 然后进行将应用于下游Collector的最终结果
+    public static <T> Collector<T, ?, List<T>> toSortedList(Comparator<? super T> c) {
+        return Collectors.collectingAndThen(Collectors.toCollection(() -> new TreeSet<>(c)), ArrayList::new);
     }
 }
