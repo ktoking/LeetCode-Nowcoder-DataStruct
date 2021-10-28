@@ -40,4 +40,34 @@ public class Test_8_3__2 {
         }
         return head.next;
     }
+
+    /**
+     * 在写一次 类似于大数相加 这个已经逆序了就直接做 记录一下进位即可
+     * @param l1
+     * @param l2
+     * @return
+     */
+    public ListNode addTwoNumbers1(ListNode l1, ListNode l2) {
+        if(l1==null||l2==null) return l1==null?l2:l1;
+        int jin=0;
+        ListNode head=new ListNode(-1);
+        ListNode newHead=head;
+
+        while (l1!=null||l2!=null||jin!=0){
+            ListNode temp=new ListNode(0);
+            if(l1!=null){
+                jin+=l1.val;
+                l1=l1.next;
+            }
+            if(l2!=null){
+                jin+=l2.val;
+                l2=l2.next;
+            }
+            temp.val=jin%10;
+            newHead.next=temp;
+            newHead=newHead.next;
+            jin/=10;
+        }
+        return head.next;
+    }
 }
