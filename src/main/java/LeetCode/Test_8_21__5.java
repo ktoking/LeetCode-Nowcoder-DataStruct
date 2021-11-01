@@ -83,5 +83,38 @@ public class Test_8_21__5 {
         return s.substring(maxS+1,maxS+maxLen+1);
     }
 
+    /**
+     * 中心扩散法
+     * @param s
+     * @return
+     */
+    public static String longestPalindrome2(String s) {
+
+        if(s.length()==0||s==null) return "";
+        int maxL=0,maxLen=0;
+        for (int i = 0; i < s.length(); i++) {
+            int left=i-1;
+            int right=i+1;
+            int len=1;
+            while (left>=0&&s.charAt(left)==s.charAt(i)){
+                left--;
+                len++;
+            }
+            while (right<s.length()&&s.charAt(right)==s.charAt(i)){
+                right++;
+                len++;
+            }
+            while (left>=0&&right<s.length()&&s.charAt(left)==s.charAt(right)){
+                left--;
+                right++;
+                len+=2;
+            }
+            if(len>maxLen){
+                maxLen=len;
+                maxL=left;
+            }
+        }
+        return s.substring(maxL+1,maxL+maxLen+1);
+    }
 
 }
