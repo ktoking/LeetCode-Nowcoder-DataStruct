@@ -18,6 +18,12 @@ public class CollectToMap {
         private String key;
         private String value;
     }
+    @Data
+    @Builder
+    static class NumObj{
+        private String key;
+        private Integer value;
+    }
 
     public static void main(String[] args) {
 
@@ -130,6 +136,27 @@ public class CollectToMap {
             System.out.println();
         });
 
+        System.out.println("map8: get sorted max element");
+        List<String> numStr = Lists.newArrayList("aa=1", "bb=10", "cc=1111", "aa=66","cc=22","dd=101");
+        Map<String, Integer> collect8 = numStr.stream().map(e -> {
+            String[] split = e.split("=");
+            return NumObj.builder().key(split[0]).value(Integer.parseInt(split[1])).build(); //老样子先转换成对象
+        }).collect(Collectors.groupingBy(NumObj::getKey // 然后通过groupingBy使用对象的KEY去分类 reducing(a,b,c)规约函数流由一个个元素组成，归约就是将一个个元素“折叠”成一个值，如求和、求最值、求平均值都是归约操作。
+                , Collectors.collectingAndThen(Collectors.reducing(0, NumObj::getValue, (c1, c2) -> { //collectingAndThen(a,b) 包装一层,不然外边拿到的是Optional类对象,
+                     return c1>c2?c1:c2;
+                }), e -> e)));
+        collect8.forEach((k,v)->{
+            System.out.println(k+":"+v);
+        });
+//        (() -> new TreeMap().descendingMap())
+        System.out.println("map9: get another sorted max element");
+        Map<String, Integer> collect9 = numStr.stream().map(e -> {
+            String[] split = e.split("=");
+            return NumObj.builder().key(split[0]).value(Integer.parseInt(split[1])).build();
+        }).collect(Collectors.groupingBy(NumObj::getKey,(() -> new TreeMap().descendingMap()),Collectors.collectingAndThen(Collectors.maxBy(Comparator.comparingInt(NumObj::getValue)), e -> e.get().getValue())));
+        collect9.forEach((k,v)->{
+            System.out.println(k+":"+v);
+        });
     }
 
     //收集器 通过传入一个Comparator 接口 来实现一个TreeSet 我们先收集成treemap 然后进行将应用于下游Collector的最终结果
