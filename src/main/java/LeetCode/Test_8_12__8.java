@@ -91,4 +91,59 @@ public class Test_8_12__8 {
             return fu==true?Integer.MIN_VALUE:Integer.MAX_VALUE; //注意输入: "-9128347233 输出: -2147483648
         }
     }
+
+
+    public int myAtoi1(String s) {
+        boolean fuhao=false;
+        boolean fu=false;
+        s=s.trim();
+        if(s==null||s.length()==0) return 0;
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i = 0; i < s.length(); i++) {
+            if(!Character.isDigit(s.charAt(i))&&fuhao){
+                break;
+            }else {
+                if(s.charAt(i)=='-'){
+                    if(i!=0){
+                      break;
+                    }
+                    fuhao=true;
+                    fu=true;
+                }else if(s.charAt(i)=='+'){
+                    if(i!=0) break;;
+                    fuhao=true;
+                }else if(Character.isDigit(s.charAt(i))){
+                    stringBuilder.append(s.charAt(i));
+                }else break;
+            }
+        }
+
+        if(stringBuilder.length()==0){     //如果为空就返回0
+            return 0;
+        }
+
+        try{                //会有溢出数字，如果溢出转换就会报错，就到报错逻辑
+            int num=Integer.parseInt(stringBuilder.toString());
+            return fu==true?-1*num:num; //这次再转换正负
+        }catch (Exception e){
+            return fu==true?Integer.MIN_VALUE:Integer.MAX_VALUE; //注意输入: "-9128347233 输出: -2147483648
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
