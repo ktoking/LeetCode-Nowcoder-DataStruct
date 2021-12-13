@@ -7,6 +7,10 @@ import lombok.Builder;
 import lombok.Data;
 
 import java.util.*;
+import java.util.function.BiConsumer;
+import java.util.function.BinaryOperator;
+import java.util.function.Function;
+import java.util.function.Supplier;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
@@ -156,6 +160,49 @@ public class CollectToMap {
         }).collect(Collectors.groupingBy(NumObj::getKey,(() -> new TreeMap().descendingMap()),Collectors.collectingAndThen(Collectors.maxBy(Comparator.comparingInt(NumObj::getValue)), e -> e.get().getValue())));
         collect9.forEach((k,v)->{
             System.out.println(k+":"+v);
+        });
+
+        System.out.println("map10: collect interface");
+        Map<String, Integer> collect10 = numStr.stream().map(e -> {
+            String[] split = e.split("=");
+            return NumObj.builder().key(split[0]).value(Integer.parseInt(split[1])).build();
+        }).collect(new Collector<NumObj, Map<String, Integer>, Map<String, Integer>>() {
+
+            @Override
+            public Supplier<Map<String, Integer>> supplier() {
+                return HashMap::new;
+            }
+
+            @Override
+            public BiConsumer<Map<String, Integer>, NumObj> accumulator() {
+                return (map, data) -> {
+                    map.put(data.getKey(), map.getOrDefault(data.getKey(), 0) + data.getValue());
+                };
+            }
+
+            @Override
+            public BinaryOperator<Map<String, Integer>> combiner() {
+                return (m1, m2) -> {
+                    m1.putAll(m2);
+                    return m1;
+                };
+            }
+
+            @Override
+            public Function<Map<String, Integer>, Map<String, Integer>> finisher() {
+                return map -> map;
+            }
+
+            @Override
+            public Set<Characteristics> characteristics() {
+                Set<Characteristics> characteristicsSet = new HashSet<>();
+                characteristicsSet.add(Characteristics.CONCURRENT);
+                return characteristicsSet;
+            }
+        });
+
+        collect10.forEach((k,v)->{
+            System.out.println(k+": " +v);
         });
     }
 
