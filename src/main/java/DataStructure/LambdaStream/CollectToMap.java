@@ -18,7 +18,7 @@ public class CollectToMap {
 
     @Data
     @Builder
-    static class ObiectMap{
+    static class ObjectMap{
         private String key;
         private String value;
     }
@@ -29,6 +29,7 @@ public class CollectToMap {
         private Integer value;
     }
 
+
     public static void main(String[] args) {
 
         List<String> strings = Lists.newArrayList("name=kk", "sex=1", "tel=1111", "email=xx@qq.com","name=ww","name=yy");
@@ -36,8 +37,8 @@ public class CollectToMap {
         System.out.println("map1: ");
         Map<String, List<String>> collect1 = strings.stream().map(e -> { //封装成对象
             String[] split = e.split("\\=", 2);
-            return ObiectMap.builder().key(split[0]).value(split[1]).build();
-        }).collect(Collectors.toMap(ObiectMap::getKey,v->Lists.newArrayList(v.getValue()), (List<String> newList, List<String> oldList) -> { // Collectors.toMap(a,b,(n1,n2)) -> a代表Map的key (这里直接用方法引用拿到key) b代表value (n1,n2)代表key相同时value的处理办法,直接合并List
+            return ObjectMap.builder().key(split[0]).value(split[1]).build();
+        }).collect(Collectors.toMap(ObjectMap::getKey,v->Lists.newArrayList(v.getValue()), (List<String> newList, List<String> oldList) -> { // Collectors.toMap(a,b,(n1,n2)) -> a代表Map的key (这里直接用方法引用拿到key) b代表value (n1,n2)代表key相同时value的处理办法,直接合并List
             oldList.addAll(newList);
             return oldList;
         }));
@@ -53,8 +54,8 @@ public class CollectToMap {
         System.out.println("map2: ");
         Map<String, List<String>> collect2 = strings.stream().map(e -> {
             String[] split = e.split("\\=", 2);
-            return ObiectMap.builder().key(split[0]).value(split[1]).build();
-        }).collect(Collectors.groupingBy(ObiectMap::getKey, Collectors.mapping(ObiectMap::getValue, Collectors.toList()))); //Collectors.groupingBy(a,b) a还是通过key来分组 ,b将value收集起来做list value
+            return ObjectMap.builder().key(split[0]).value(split[1]).build();
+        }).collect(Collectors.groupingBy(ObjectMap::getKey, Collectors.mapping(ObjectMap::getValue, Collectors.toList()))); //Collectors.groupingBy(a,b) a还是通过key来分组 ,b将value收集起来做list value
         collect2.forEach((k,v)->{
             System.out.printf(k+" { ");
             String vList = v.stream().collect(Collectors.joining(",")); //加上逗号,最后一个不加
@@ -65,9 +66,9 @@ public class CollectToMap {
         System.out.println();
 
         System.out.println("map3: get name List with Multimap");
-        List<ObiectMap> collect3 = strings.stream().map(e -> {
+        List<ObjectMap> collect3 = strings.stream().map(e -> {
             String[] split = e.split("\\=", 2);
-            return ObiectMap.builder().key(split[0]).value(split[1]).build();
+            return ObjectMap.builder().key(split[0]).value(split[1]).build();
         }).collect(Collectors.toList());
         Multimap<String, String> multiMap = ArrayListMultimap.create();  //使用Guava的Multimap来存 value直接是collection,可以随意转换
         collect3.forEach(c -> multiMap.put(c.getKey(), c.getValue()));
@@ -77,8 +78,8 @@ public class CollectToMap {
         System.out.println("map4: get name with count");
         Map<String, Long> collect4 = strings.stream().map(e -> {
             String[] split = e.split("\\=", 2);
-            return ObiectMap.builder().key(split[0]).value(split[1]).build();
-        }).collect(Collectors.groupingBy(ObiectMap::getKey, Collectors.counting())); // 拿到数量
+            return ObjectMap.builder().key(split[0]).value(split[1]).build();
+        }).collect(Collectors.groupingBy(ObjectMap::getKey, Collectors.counting())); // 拿到数量
         collect4.forEach((k,v)->{
             System.out.printf(k+" { ");
             System.out.printf("%d",v);
@@ -99,8 +100,8 @@ public class CollectToMap {
         }};
         Map<String, List<String>> collect5 = specialString.stream().map(e -> { //封装成对象
             String[] split = e.split("\\=", 2);
-            return ObiectMap.builder().key(split[0]).value(split[1]).build();
-        }).collect(Collectors.groupingBy(ObiectMap::getKey, Collectors.mapping(ObiectMap::getValue, toSortedList((o1, o2) -> { //groupingBy 可以有三个重载方法 三个参数分别是 1.分类器(通过什么方式分类) 2.封装类(默认hashmap 可以传一些其他Collector) 3.收集dowStream (默认tolist)
+            return ObjectMap.builder().key(split[0]).value(split[1]).build();
+        }).collect(Collectors.groupingBy(ObjectMap::getKey, Collectors.mapping(ObjectMap::getValue, toSortedList((o1, o2) -> { //groupingBy 可以有三个重载方法 三个参数分别是 1.分类器(通过什么方式分类) 2.封装类(默认hashmap 可以传一些其他Collector) 3.收集dowStream (默认tolist)
             if (keyMap.get(o1) == null) { //Collectors.mapping 返回是一个Collector 里面可以指定通过特定值收集  toSortedList我们自定义一个收集器
                 return 1;
             } else if (keyMap.get(o2) == null) {
@@ -121,7 +122,7 @@ public class CollectToMap {
         System.out.println("map7: get specialString sort first");
         Map<String, List<String>> collect6 = specialString.stream().map(e -> { //封装成对象
             String[] split = e.split("\\=", 2);
-            return ObiectMap.builder().key(split[0]).value(split[1]).build();
+            return ObjectMap.builder().key(split[0]).value(split[1]).build();
         }).sorted((o1,o2)->{
             if (keyMap.get(o1.getValue()) == null) {
                 return 1;
@@ -131,7 +132,7 @@ public class CollectToMap {
                 return 0;
             }
             return keyMap.get(o1.getValue()).compareTo(keyMap.get(o2.getValue()));
-        }).collect(Collectors.groupingBy(ObiectMap::getKey,LinkedHashMap::new,Collectors.mapping(ObiectMap::getValue,Collectors.toList())));
+        }).collect(Collectors.groupingBy(ObjectMap::getKey,LinkedHashMap::new,Collectors.mapping(ObjectMap::getValue,Collectors.toList())));
 
         collect6.forEach((k,v)->{
             System.out.printf(k+" ");
