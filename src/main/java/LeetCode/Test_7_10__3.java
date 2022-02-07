@@ -92,4 +92,33 @@ public class Test_7_10__3 {
         }
         return ans;
     }
+
+    // 滑动窗口解决问题
+    public int lengthOfLongestSubstring11(String s) {
+        Set<Character> set=new HashSet<>();
+        int right=-1,ans=0;
+        int n=s.length();
+        for (int i = 0; i < s.length(); i++) {
+            if(i!=0){
+                set.remove(s.charAt(i-1));
+            }
+            while (right+1<n&&!set.contains(s.charAt(right+1))){
+                set.add(s.charAt(right+1));
+                right++;
+            }
+            ans=Math.max(ans,right-i+1);
+        }
+        return ans;
+    }
+
+
+
+
+
+
+
+
+
+
+
 }
