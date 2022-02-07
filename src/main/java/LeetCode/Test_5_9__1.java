@@ -108,4 +108,35 @@ public class Test_5_9__1 {
         return new int[]{};
     }
 
+
+
+
+    public int[] twoSum1111(int[] nums, int target) {
+        Map<Integer,Integer> data=new HashMap<>();
+        int[] ints = new int[2];
+        for (int i = 0; i < nums.length ; i++) {
+            if(data.get(nums[i])!=null){
+                ints[0]=data.get(nums[i]);
+                ints[1]=i;
+                return ints;
+            }else {
+                data.put(target-nums[i],i);
+            }
+        }
+        return ints;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
