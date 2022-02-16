@@ -1,6 +1,7 @@
 package LeetCode;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -40,34 +41,31 @@ import java.util.List;
  * 1 <= target <= 500
  */
 public class Test_9_9__39 {
-    int target;
-    List<List<Integer>> lists=new ArrayList<>();
+    /**
+     * 排序剪枝
+     * @param candidates
+     * @param target
+     * @return
+     */
     public List<List<Integer>> combinationSum(int[] candidates, int target) {
-        this.target=target;
-        huisu(new ArrayList<>(),0,candidates,0);
-        return lists;
+        List<List<Integer>> res=new ArrayList<>();
+        Arrays.sort(candidates);
+        dfs(res,new ArrayList<>(),0,target,candidates);
+        return res;
     }
 
-    /**
-     * 标准的回溯模板
-     * @param list
-     * @param plus
-     * @param candidates
-     * @param index
-     */
-    public void huisu(List<Integer> list,int plus,int[] candidates,int index){
-        if(plus==target){
-            lists.add(new ArrayList<>(list));
-            return;
-        }else if(plus>target) {
+    void dfs(List<List<Integer>> res,List<Integer> collect,int index,int target,int[] candidates){
+        if(target==0){
+            res.add(new ArrayList<>(collect));
             return;
         }
-        for (int i = index; i <candidates.length ; i++) {
-            list.add(candidates[i]);
-            plus+=candidates[i];
-            huisu(list,plus,candidates,i+1);
-            plus-=candidates[i];
-            list.remove(list.size()-1);
+        if(target<0) return;
+
+        for (int i = index; i < candidates.length ; i++) {
+            if(target-candidates[i]<0) break;
+            collect.add(candidates[i]);
+            dfs(res,collect,i,target-candidates[i],candidates);
+            collect.remove(collect.size()-1);
         }
     }
 }
