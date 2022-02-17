@@ -129,5 +129,37 @@ public class Test_8_4__46 {
     }
 
 
+    /**
+     * 全排列
+     * @param nums
+     * @return
+     */
+    public List<List<Integer>> permute11(int[] nums) {
+        List<List<Integer>> res=new ArrayList<>();
+        quanhHS(res,new ArrayList<>(),new boolean[nums.length],nums);
+        return res;
+    }
+
+
+    public void quanhHS(List<List<Integer>> res,List<Integer> collect,boolean[] vis,int[] nums){
+       if(collect.size()==nums.length){
+           res.add(new ArrayList<>(collect));
+           return;
+       }
+        for (int i = 0; i < nums.length; i++) {
+            if(vis[i]) continue;
+            collect.add(nums[i]);
+            vis[i]=true;
+            quanhHS(res,collect,vis,nums);
+            vis[i]=false;
+            collect.remove(collect.size()-1);
+        }
+    }
+
+
+
+
+
+
 
 }
