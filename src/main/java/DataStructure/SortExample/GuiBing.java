@@ -6,7 +6,7 @@ public class GuiBing {
     public static void main(String[] args) {
         int[] arr={2,3,1,2,3,5,6,2,1};
 //        gui(arr,0,arr.length-1);
-        GuiBingS(arr,0,arr.length-1);
+        gui1(arr,0,arr.length-1);
         Arrays.stream(arr).forEach(value -> System.out.println(value));
     }
     /**
@@ -127,6 +127,26 @@ public class GuiBing {
         while (k<=high) temp[j++]=arr[k++];
         for (int l = 0; l < temp.length; l++) {
             arr[low++]=temp[l];
+        }
+    }
+    public static void gui1(int[] arr,int low,int high){
+        int mid = (low+high)/2;
+        if(low<high){
+            gui1(arr,low,mid);
+            gui(arr,mid+1,high);
+            sort1(arr,low,mid,high);
+        }
+    }
+    public static void sort1(int[] arr,int low,int mid,int high){
+        int[] temp=new int[high-low+1];
+        int nl=low,nh=mid+1,index=0;
+        while (nl<=mid&&nh<=high){
+            temp[index++]=arr[nl]>arr[nh]?arr[nh++]:arr[nl++];
+        }
+        while (nl<=mid) temp[index++]=arr[nl++];
+        while (nh<=high) temp[index++]=arr[nh++];
+        for (int i = 0; i < temp.length; i++) {
+            arr[low++]=temp[i];
         }
     }
 }
