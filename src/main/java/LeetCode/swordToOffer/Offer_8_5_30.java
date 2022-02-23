@@ -1,5 +1,7 @@
 package LeetCode.swordToOffer;
 
+import io.swagger.models.auth.In;
+
 import java.util.Stack;
 
 /**
@@ -109,5 +111,34 @@ class MinStack1 {
 
 public class Offer_8_5_30 {
 
+
+}
+
+
+class MinStack2{
+
+    Stack<Integer> s1;Stack<Integer> s2;
+    public MinStack2() {
+        s1=new Stack<>();
+        s2=new Stack<>();
+    }
+
+    public void push(int x) {
+        s1.push(x);
+        s2.push(s2.isEmpty()?x:Math.min(s2.peek(),x));
+    }
+
+    public void pop() {
+        s1.pop();
+        s2.pop();
+    }
+
+    public int top() {
+        return s1.peek();
+    }
+
+    public int min() {
+        return s2.peek();
+    }
 
 }
