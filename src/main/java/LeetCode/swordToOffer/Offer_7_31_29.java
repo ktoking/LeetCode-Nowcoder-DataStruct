@@ -116,7 +116,18 @@ public class Offer_7_31_29 {
         }
     }
 
-
+    public int[] spiralOrder3(int[][] matrix) {
+        if(matrix==null||matrix.length==0) return new int[]{};
+        int l=0,t=0,r=matrix[0].length-1,b=matrix.length-1,count=0;
+        int[] res=new int[(r+1)*(b+1)];
+        while (true){
+            for (int i = l; i <=r ; i++){ res[count++]=matrix[t][i];} if(++t>b)break;
+            for (int i = t; i <=b ; i++){ res[count++]=matrix[i][r];} if(--r<l)break;
+            for (int i = r; i >=l ; i--){ res[count++]=matrix[b][i];} if(--b<t)break;
+            for (int i = b; i >=t ; i--){ res[count++]=matrix[i][l];} if(++l>r)break;
+        }
+        return res;
+    }
 
 
 
