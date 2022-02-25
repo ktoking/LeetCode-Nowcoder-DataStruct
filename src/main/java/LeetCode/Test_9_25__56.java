@@ -2,6 +2,7 @@ package LeetCode;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 
 public class Test_9_25__56 {
@@ -27,5 +28,28 @@ public class Test_9_25__56 {
             }
         }
         return list.toArray(new int[list.size()][]);
+    }
+
+
+    /**
+     *
+     * @param intervals
+     * @return
+     */
+    public int[][] merge1(int[][] intervals) {
+        if(intervals.length==0) return new int[1][2];
+        List<int[]> res=new LinkedList<>();
+        Arrays.sort(intervals,(o1,o2)->{return o1[0]-o2[0];});
+        res.add(intervals[0]);
+        for (int i = 1; i < intervals.length; i++) {
+            int[] peek=res.get(res.size()-1);
+            int[] cur=intervals[i];
+            if(cur[0]>peek[1]){
+                res.add(cur);
+            }else {
+                peek[1]=Math.max(peek[1],cur[1]);
+            }
+        }
+        return res.toArray(new int[res.size()][]);
     }
 }
