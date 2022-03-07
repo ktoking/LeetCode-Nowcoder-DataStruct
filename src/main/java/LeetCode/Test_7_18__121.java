@@ -65,4 +65,41 @@ public class Test_7_18__121 {
         return max;
     }
 
+
+    public int maxProfit1(int[] prices) {
+        int max=0;
+        int low=Integer.MAX_VALUE;
+        for (int i = 0; i < prices.length; i++) {
+            low = Math.min(prices[i], low);
+            max= Math.max(max,prices[i]-low);
+        }
+        return max;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
