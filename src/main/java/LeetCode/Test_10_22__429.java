@@ -1,5 +1,7 @@
 package LeetCode;
 
+import io.swagger.models.auth.In;
+
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -71,4 +73,36 @@ public class Test_10_22__429 {
         }
         return lists;
     }
+
+    /**
+     * 层序遍历
+     * @param root
+     * @return
+     */
+    public List<List<Integer>> levelOrder1(Node root) {
+        List<List<Integer>> res=new ArrayList<>();
+        if(root==null) return res;
+        Queue<Node> queue=new LinkedList<>();
+        queue.offer(root);
+        while (!queue.isEmpty()){
+            int size=queue.size();
+            List<Integer> list=new ArrayList<>();
+            while (size-->0){
+                Node poll = queue.poll();
+                list.add(poll.val);
+                if(poll.children!=null||poll.children.size()>0){
+                    for (Node child : poll.children) {
+                        queue.add(child);
+                    }
+                }
+            }
+            res.add(list);
+        }
+        return res;
+    }
+
+
+
+
+
 }
