@@ -45,4 +45,36 @@ public class Test_10_29__206 {
         head.next=null;
         return cur;
     }
+
+    /**
+     * 头插法
+     * @param head
+     * @return
+     */
+    public ListNode reverseList2(ListNode head) {
+        ListNode newHead=new ListNode(-1);
+        ListNode temp=null;
+        while (head!=null){
+            temp=head.next;
+            head.next=newHead.next;
+            newHead.next=head;
+            head=temp;
+        }
+        return newHead.next;
+    }
+
+    /**
+     * 递归反转链表
+     * @param head
+     * @return
+     */
+    public ListNode reverseList3(ListNode head) {
+        if(head==null||head.next==null){
+            return head;
+        }
+        ListNode newHead=reverseList3(head.next);
+        head.next.next=head;
+        head.next=null;
+        return newHead;
+    }
 }
