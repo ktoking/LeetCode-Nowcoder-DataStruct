@@ -97,4 +97,43 @@ public class Test_6_29_215 {
         return low;
     }
 
+    /**
+     * 快排问题
+     * @param nums
+     * @param k
+     * @return
+     */
+    public int findKthLargest3(int[] nums, int k) {
+        if(nums.length==0||nums==null) return -1;
+        return sort(nums,k-1,0,nums.length-1);
+    }
+    public int sort(int[] nums,int k,int low,int high){
+        int index=getIndex3(nums,low,high);
+        if(index==k) return nums[index];
+        else if(index<k) return sort(nums,k,index+1,high);
+        else return sort(nums,k,low,index-1);
+    }
+    public int getIndex3(int[] nums,int low,int high){
+        int temp=nums[low];
+        while (low<high){
+            while (low<high&&nums[high]<=temp) high--;
+            nums[low]=nums[high];
+            while (low<high&&nums[low]>=temp) low++;
+            nums[high]=nums[low];
+        }
+        nums[low]=temp;
+        return low;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
 }
