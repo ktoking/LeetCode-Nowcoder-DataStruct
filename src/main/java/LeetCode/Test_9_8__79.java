@@ -102,4 +102,30 @@ public class Test_9_8__79 {
         vis[i][j]=false;
         return false;
     }
+
+
+    // 单词搜搜
+    public boolean exist11(char[][] board, String word) {
+        boolean[][] vis=new boolean[board.length][board[0].length];
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board[0].length; j++) {
+                if(dfs(vis,board,0,word,i,j)) return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean dfs(boolean[][] vis,char[][] board,int index,String word,int i,int j){
+        if(i<0||j<0||i>=board.length||j>=board[0].length||vis[i][j]||board[i][j]!=word.charAt(index)) return false;
+        if(index==word.length()-1){
+            return true;
+        }
+        vis[i][j]=true;
+        boolean res=dfs(vis,board,index+1,word,i,j+1)||dfs(vis,board,index+1,word,i+1,j)||
+        dfs(vis,board,index+1,word,i,j-1)||dfs(vis,board,index+1,word,i-1,j);
+        vis[i][j]=false;
+        return res;
+    }
+
+
 }
