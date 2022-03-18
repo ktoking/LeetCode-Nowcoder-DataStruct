@@ -126,7 +126,29 @@ public class Test_7_10_200 {
         return count;
     }
 
-
+    public int numIslands1(char[][] grid) {
+        int count=0;
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid[0].length; j++) {
+                if(grid[i][j]=='1'){
+                    count++;
+                    dfs1(grid,i,j);
+                }
+            }
+        }
+        return count;
+    }
+    public void dfs1(char[][] grid, int i,int j){
+        int rm=grid.length,cm=grid[0].length;
+        if(i<0||j<0||i>=rm||j>=cm||grid[i][j]!='1'){
+            return;
+        }
+        grid[i][j]='0';
+        dfs1(grid,i-1,j);
+        dfs1(grid,i,j-1);
+        dfs1(grid,i+1,j);
+        dfs1(grid,i,j+1);
+    }
 
 
 
