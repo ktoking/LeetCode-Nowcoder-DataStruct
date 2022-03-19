@@ -1,5 +1,7 @@
 package LeetCode;
 
+import io.swagger.models.auth.In;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -46,6 +48,25 @@ public class Test_8_26__491 {
             tmp.remove(tmp.size() - 1);
         }
     }
+    public List<List<Integer>> findSubsequences(int[] nums) {
+        List<List<Integer>> res = new ArrayList<>();
+        huisu(nums,0,new ArrayList<Integer>(),res);
+        return res;
+    }
+    public void huisu(int[]nums, int index, List<Integer> collect,List<List<Integer>> res){
+        if(collect.size()>1){
+            res.add(new ArrayList<>(collect));
+        }
+        Set<Integer> set=new HashSet<>(); //判断去重
+        for (int i = index; i < nums.length ; i++) {
+            if(set.contains(nums[i])||collect.size()>0&&collect.get(collect.size()-1)>nums[i]) continue;
+            set.add(nums[i]);
+            collect.add(nums[i]);
+            huisu(nums,i+1,collect,res);
+            collect.remove(collect.size()-1);
+        }
+    }
+
 
 
 }
