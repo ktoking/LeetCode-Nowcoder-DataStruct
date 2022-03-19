@@ -94,4 +94,31 @@ public class Test_11_10__148 {
         tt.next=left==null?right:left;
         return newhead.next;
     }
+
+    public ListNode sortList2(ListNode head) {
+        if(head==null||head.next==null) return head;
+        ListNode f=head.next,l=head;
+        while (f!=null&&f.next!=null){
+            f=f.next.next;
+            l=l.next;
+        }
+        ListNode temp=l.next;
+        l.next=null;
+        ListNode left = sortList2(head);
+        ListNode right = sortList2(temp);
+        ListNode newHead=new ListNode(-1);
+        ListNode nh=newHead;
+        while (left!=null&&right!=null){
+            if(left.val>right.val){
+                nh.next=right;
+                right=right.next;
+            }else {
+                nh.next=left;
+                left=left.next;
+            }
+            nh=nh.next;
+        }
+        nh.next=left==null?right:left;
+        return newHead.next;
+    }
 }
