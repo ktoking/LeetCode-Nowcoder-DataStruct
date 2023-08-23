@@ -1,6 +1,7 @@
 package LeetCode;
 
 import io.swagger.models.auth.In;
+import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -101,6 +102,27 @@ public class Test_10_22__429 {
         return res;
     }
 
+    public List<List<Integer>> levelOrder2(Node root) {
+       List<List<Integer>> res=new ArrayList<>();
+       if(root==null) return res;
+       Queue<Node> queue=new LinkedList<>();
+       queue.offer(root);
+       while (!queue.isEmpty()){
+           List<Integer> list=new ArrayList<>();
+           int size=queue.size();
+           while (size-->0){
+               Node poll = queue.poll();
+               if(!CollectionUtils.isEmpty(poll.children)){
+                   for (Node child : poll.children) {
+                       queue.offer(child);
+                   }
+               }
+               list.add(poll.val);
+           }
+           res.add(list);
+       }
+       return res;
+    }
 
 
 
