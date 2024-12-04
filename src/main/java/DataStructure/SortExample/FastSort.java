@@ -8,7 +8,7 @@ public class FastSort {
         fast(0,arr.length-1,arr);
         fastS(arr,0,arr.length-1);
         fast1(0, arr.length-1,arr);
-        Arrays.stream(arr).forEach(value -> System.out.println(value));
+        Arrays.stream(arr).forEach(System.out::println);
     }
     public static void fast(int low,int high,int[] arr){
         if(low<high){

@@ -79,7 +79,7 @@ public class Test_8_4__46 {
 
     public static void main(String[] args) {
         List<List<Integer>> lists = permute22(new int[]{1, 2, 3});
-        System.out.println(1);
+        System.out.println(lists);
     }
 
     /**

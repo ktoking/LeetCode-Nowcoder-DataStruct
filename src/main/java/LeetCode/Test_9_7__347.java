@@ -1,6 +1,7 @@
 package LeetCode;
 
 import java.io.InputStream;
+import java.util.Comparator;
 import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.Queue;
@@ -49,8 +50,8 @@ public class Test_9_7__347 {
      * @return
      */
     public static int[] topKFrequent(int[] nums, int k) {
-        Map<Integer,Integer> map= IntStream.of(nums).boxed().collect(Collectors.toMap(e->e,e->1,(n1,n2)->{return n1+n2;}));
-        Queue<Integer> queue=new PriorityQueue<>((n1,n2)->map.get(n1)-map.get(n2));
+        Map<Integer,Integer> map= IntStream.of(nums).boxed().collect(Collectors.toMap(e->e,e->1, Integer::sum));
+        Queue<Integer> queue=new PriorityQueue<>(Comparator.comparingInt(map::get));
         map.forEach((key,val)->{
             if(queue.size()<k){
                 queue.offer(key);
