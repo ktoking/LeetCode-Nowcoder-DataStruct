@@ -25,11 +25,6 @@ import java.util.Set;
  如果不得使用临时缓冲区，该怎么解决？
  */
 
-class ListNode {
-     int val;
-     ListNode next;
-     ListNode(int x) { val = x; }
-  }
 
 public class Test_6_26_0201 {
 
